@@ -4,12 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import BootstrapVue from 'bootstrap-vue'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlusCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faTrashAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.use(BootstrapVue)
 
-library.add({faPlusCircle, faTrashAlt})
+library.add({ faPlusCircle, faTrashAlt, faTimesCircle })
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

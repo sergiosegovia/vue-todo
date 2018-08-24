@@ -5,7 +5,12 @@
         <b-navbar-brand href="#">ToDo APP</b-navbar-brand>
         <ul class="top-nav">
           <li>
-            <font-awesome-icon icon="plus-circle" />
+            <font-awesome-icon icon="times-circle"
+                               @click="showTodoAdd"
+                               v-if="show"/>
+            <font-awesome-icon icon="plus-circle"
+                               @click="showTodoAdd"
+                               v-else/>
           </li>
         </ul>
       </b-navbar>
@@ -24,12 +29,19 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 export default {
   name: 'App',
+  data () {
+    return {
+      show: false
+    }
+  },
   components: {
     TodoList,
     TodoAdd
   },
   methods: {
-
+    showTodoAdd: function () {
+      this.show = !this.show
+    }
   }
 }
 </script>
