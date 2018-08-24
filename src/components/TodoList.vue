@@ -1,10 +1,12 @@
 <template>
   <div class="todo-list">
-    <TodoAdd @add="addTodo"/>
-        <Todo v-for="(todo, index) in todos"
-              :key="index"
-              :todo="todo"
-              @delete="deleteTodo(index)"/>
+    <div class="container">
+      <TodoAdd @add="addTodo"/>
+      <Todo v-for="(todo, index) in todos"
+            :key="index"
+            :todo="todo"
+            @delete="deleteTodo(index)"/>
+    </div>
   </div>
 </template>
 
