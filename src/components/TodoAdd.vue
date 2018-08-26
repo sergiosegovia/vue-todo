@@ -4,7 +4,7 @@
         <input
           type="text"
           name="todo-add"
-          placeholder="Write here the new task"
+          placeholder="Write here your new task"
           v-model="name" />
         <b-button variant="info" @click="add">Add ToDo</b-button>
     </div>
@@ -23,8 +23,7 @@ export default {
   },
   methods: {
     add: function () {
-      this.$emit('add', { name: this.name, completed: this.completed, id: this.id++ })
-      // document.getElementById('todo-add-form').reset()
+      this.$emit('add', { name: this.name, completed: this.completed, id: this._uid })
     }
   }
 }

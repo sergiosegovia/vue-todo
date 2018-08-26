@@ -1,13 +1,47 @@
 <template>
   <div class="todo-list">
-    <div class="container">
-      <TodoAdd @add="addTodo"/>
       <Todo v-for="(todo, index) in todos"
             :key="index"
             :todo="todo"
-            @delete="deleteTodo(index)"/>
-    </div>
+            @delete="deleteTodo(index)"
+            @completed="completeTodo(todo, index)"/>
+
+            <div class="intro-list" v-if="todos.length === 0">
+              <ul>
+                <li>
+                  <div class="test">
+                    <div class="test-title">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="test">
+                    <div class="test-title">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="test">
+                    <div class="test-title">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="test">
+                    <div class="test-title">
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="test">
+                    <div class="test-title">
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
   </div>
+
 </template>
 
 <script>
@@ -20,20 +54,23 @@ export default {
     Todo,
     TodoAdd
   },
+  props: ['todos'],
   data () {
     return {
-      todos: [
-        // {name: 'Todo 1', completed: false, id: 1},
-        // {name: 'Todo 2', completed: false, id: 2}
-      ]
+
     }
   },
   methods: {
-    addTodo: function (todo) {
-      this.todos.push(todo)
+    completeTodo: function (todo, index) {
+
     },
     deleteTodo: function (index) {
       this.todos.splice(index, 1)
+      if (this.todos.length === 0) {
+        this.$emit('todoListEmpty', { show: false })
+      } else {
+        this.$emit('todoListEmpty', { showIntro: false })
+      }
     }
   }
 }

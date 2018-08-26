@@ -3,13 +3,14 @@
 import Vue from 'vue'
 import App from './App'
 import BootstrapVue from 'bootstrap-vue'
+import PrettyCheckbox from 'pretty-checkbox'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlusCircle, faTrashAlt, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPlusCircle, faTrashAlt, faTimesCircle, faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue, PrettyCheckbox)
 
-library.add({ faPlusCircle, faTrashAlt, faTimesCircle })
+library.add({ faPlusCircle, faTrashAlt, faTimesCircle, faBars })
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
