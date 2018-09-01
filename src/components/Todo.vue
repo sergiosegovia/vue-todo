@@ -47,6 +47,7 @@ export default {
     okDelete: function (index) {
       this.$emit('delete', index)
       this.confirmDelete = false
+      this.trashOpened = false
     },
     noDelete: function () {
       this.confirmDelete = false
