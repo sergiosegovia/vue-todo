@@ -1,23 +1,45 @@
 <template>
 
   <div :class="{ todo, completed: todo.completed }">
-    <b-card
-            style="max-width: 100%"
-            class="mb-2">
-        <h2>{{ todo.name }}</h2>
+    <b-card style="max-width: 100%" class="mb-2">
 
-        <div class="pretty p-switch p-fill" v-if="trashOpened == false">
-          <input type="checkbox" v-model="todo.completed" @change="completeTodo(todo)" />
-          <div class="state p-success">
-              <label></label>
-          </div>
+      <div class="todo-name">
+        <div class="todo-name-editor" v-if="showEditTodoName">
+          <input v-model="todo.name" type="text" autofocus autocapitalize>
+          <b-button variant="info" @click="closeEditTodoName">OK</b-button>
         </div>
+        <h2 @click="editTodoName" v-else class="underline">{{ todo.name }}</h2>
+      </div>
 
-        <span v-if="confirmDelete" > Are you sure? -
-          <button type="button" name="button" @click="okDelete(todo)">OK</button>
-          <button type="button" name="button" @click="noDelete">NO</button>
+      <div class="todo-description">
+        <div class="todo-desciption-editor" v-if="showEditTodoDesc">
+          <b-form-textarea v-model="todo.description"
+                           :rows="3"
+                           :max-rows="6"
+                           no-resize>
+          </b-form-textarea>
+          <b-button variant="info" @click="closeEditTodoDesc">OK</b-button>
+        </div>
+        <div v-if="showTodoDesc" class="todo-description-content">
+          <pre v-if="!todo.description" @click="editTodoDesc" class="underline">Add some details here...</pre>
+          <pre v-if="todo.description" @click="editTodoDesc" class="underline">{{ todo.description }}</pre>
+        </div>
+      </div>
+
+      <div class="complete-switch pretty p-switch p-fill" v-if="showComplete">
+        <input type="checkbox" v-model="todo.completed" @change="completeTodo(todo)" />
+        <div class="state p-success">
+          <label></label>
+        </div>
+      </div>
+
+      <div class="delete-todo" v-if="showTrash">
+        <span v-if="showConfirmDelete" > Are you sure? -
+          <b-button variant="info" @click="okDelete(todo)">OK</b-button>
+          <b-button variant="info" @click="noDelete">NO</b-button>
         </span>
-        <span @click="deleteTodo()"><font-awesome-icon icon="trash-alt" /></span>
+        <span v-else @click="deleteTodo()"><font-awesome-icon icon="trash-alt" /></span>
+      </div>
 
     </b-card>
   </div>
@@ -32,8 +54,17 @@ export default {
   props: ['todo', 'index'],
   data () {
     return {
-      confirmDelete: false,
-      trashOpened: false
+      showTrash: true,
+      showComplete: true,
+      showEditTodoName: false,
+      showEditTodoDesc: false,
+      showConfirmDelete: false,
+      showTodoDesc: true
+
+      // confirmDelete: false,
+      // trashOpened: false,
+      // enableEditTodoName: false,
+      // enableEditTodoDesc: false
     }
   },
   methods: {
@@ -41,17 +72,41 @@ export default {
       this.$emit('completed', { completed: todo.completed })
     },
     deleteTodo: function () {
-      this.confirmDelete = true
-      this.trashOpened = true
+      this.showConfirmDelete = true
+      this.showTrash = true
+      this.showComplete = false
     },
     okDelete: function (index) {
       this.$emit('delete', index)
-      this.confirmDelete = false
-      this.trashOpened = false
+      this.showConfirmDelete = false
+      this.showTrash = true
     },
     noDelete: function () {
-      this.confirmDelete = false
-      this.trashOpened = false
+      this.showConfirmDelete = false
+      this.showTrash = true
+      this.showComplete = true
+    },
+    editTodoName: function () {
+      this.showEditTodoName = true
+      this.showComplete = false
+      this.showTrash = false
+    },
+    editTodoDesc: function () {
+      this.showEditTodoDesc = true
+      this.showTrash = false
+      this.showComplete = false
+      this.showTodoDesc = false
+    },
+    closeEditTodoName: function () {
+      this.showEditTodoName = false
+      this.showComplete = true
+      this.showTrash = true
+    },
+    closeEditTodoDesc: function () {
+      this.showEditTodoDesc = false
+      this.showComplete = true
+      this.showTrash = true
+      this.showTodoDesc = true
     }
   }
 }
@@ -95,8 +150,28 @@ export default {
     background-color: #17b89a5e;
   }
 
+  .todo-name {
+    margin-bottom: 1rem;
+  }
+
+  .todo-desciption-editor textarea {
+    margin-bottom: .5rem
+  }
+
+  .todo-desciption-editor button {
+    float: right;
+  }
+
   .todo.completed .card-body {
     background-color: #17b89a5e;
+  }
+
+  .delete-todo {
+    float: right;
+  }
+
+  pre {
+    color: #c3c3c3;
   }
 
 </style>

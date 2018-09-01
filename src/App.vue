@@ -161,4 +161,16 @@ export default {
     border-color: #fff !important;
   }
 
+  /* Utilities */
+
+  .underline {
+    border-bottom: 2px dotted #c3c3c3;
+    display: inline-block;
+    line-height: 1.125;
+  }
+
+  textarea {
+    resize: none;
+  }
+
 </style>

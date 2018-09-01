@@ -18,7 +18,8 @@ export default {
     return {
       name: null,
       completed: false,
-      id: null
+      id: null,
+      description: null
     }
   },
   methods: {
