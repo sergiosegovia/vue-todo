@@ -2,6 +2,7 @@
   <div id="app">
     <header>
       <b-navbar type="dark" variant="info">
+        <!-- <font-awesome-icon icon="bars" /> -->
         <b-navbar-brand href="#">ToDo APP</b-navbar-brand>
         <ul class="top-nav">
           <li>
@@ -23,7 +24,7 @@
         <TodoAdd @add="addTodo"/>
       </div>
       <div class="intro" v-if="showIntro">
-        <h3>You haven't any todo yet. Just use the plus button to add one.</h3>
+        <h3>You haven't any ToDO yet. Just use the plus button to add one.</h3>
 
       </div>
       <TodoList :todos="todos" @todoListEmpty="checkTodoArray"/>
@@ -87,18 +88,13 @@ export default {
     list-style: none;
   }
 
-  .navbar-brand {
-    font-size: 1.5rem;
-  }
-
-  .top-nav {
+  .navbar {
     font-size: 1.5rem;
     color: #fff;
   }
 
-  .top-nav li {
-    margin-left: .5rem;
-    display: inline-block;
+  .navbar-brand {
+    font-size: 1.5rem;
   }
 
   h3 {
